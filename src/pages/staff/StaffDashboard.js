@@ -7,6 +7,7 @@ import {
   Medication, CheckCircle, AccessTime,
   Cancel, Person, WbSunny
 } from '@mui/icons-material';
+import AiChat from '../../components/common/AiChat';
 
 /**
  * STAFF DASHBOARD
@@ -19,6 +20,8 @@ import {
  * - Color coded status (Green/Yellow/Red)
  */
 const StaffDashboard = () => {
+
+  const [showAI, setShowAI] = useState(false);
 
   // Staff info (Replace with API later)
   const staff = {
@@ -390,6 +393,31 @@ const StaffDashboard = () => {
           ))}
         </Box>
       </Container>
+
+      {/* AI Chat Button - Fixed Position */}
+      <Box sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 9999 }}>
+        {showAI ? (
+          <AiChat role="STAFF" onClose={() => setShowAI(false)} />
+        ) : (
+          <Button
+            variant="contained"
+            onClick={() => setShowAI(true)}
+            sx={{
+              bgcolor: '#f57f17',
+              borderRadius: 4,
+              px: 3, py: 1.5,
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              boxShadow: '0 8px 25px rgba(245,127,23,0.4)',
+              '&:hover': { bgcolor: '#e65100', transform: 'scale(1.05)' },
+              transition: 'all 0.2s'
+            }}
+          >
+            🤖 Ask AI Assistant
+          </Button>
+        )}
+      </Box>
+
     </Box>
   );
 };

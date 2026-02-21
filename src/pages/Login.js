@@ -20,6 +20,7 @@ const Login = () => {
     if (role === 'DOCTOR') navigate('/doctor/dashboard');
     else if (role === 'PATIENT') navigate('/patient/dashboard');
     else if (role === 'STAFF') navigate('/staff/dashboard');
+    else if (role === 'ADMIN') navigate('/admin/dashboard');
   };
 
   const handleLogin = async (e) => {
@@ -31,11 +32,9 @@ const Login = () => {
         password: credentials.password
       });
 
-      // Save token and role
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', response.data.role);
 
-      // Redirect based on role
       const role = response.data.role;
       if (role === 'DOCTOR') {
         navigate('/doctor/dashboard');
@@ -43,6 +42,8 @@ const Login = () => {
         navigate('/patient/dashboard');
       } else if (role === 'STAFF') {
         navigate('/staff/dashboard');
+      } else if (role === 'ADMIN') {
+        navigate('/admin/dashboard');
       } else {
         navigate('/dashboard');
       }
@@ -125,12 +126,7 @@ const Login = () => {
                 fullWidth
                 variant="outlined"
                 onClick={() => handleMockLogin('DOCTOR')}
-                sx={{
-                  borderColor: '#0062ff',
-                  color: '#0062ff',
-                  fontWeight: 700,
-                  borderRadius: 2
-                }}
+                sx={{ borderColor: '#0062ff', color: '#0062ff', fontWeight: 700, borderRadius: 2 }}
               >
                 🩺 Login as Doctor
               </Button>
@@ -138,12 +134,7 @@ const Login = () => {
                 fullWidth
                 variant="outlined"
                 onClick={() => handleMockLogin('PATIENT')}
-                sx={{
-                  borderColor: '#2e7d32',
-                  color: '#2e7d32',
-                  fontWeight: 700,
-                  borderRadius: 2
-                }}
+                sx={{ borderColor: '#2e7d32', color: '#2e7d32', fontWeight: 700, borderRadius: 2 }}
               >
                 🧑‍⚕️ Login as Patient
               </Button>
@@ -151,14 +142,19 @@ const Login = () => {
                 fullWidth
                 variant="outlined"
                 onClick={() => handleMockLogin('STAFF')}
-                sx={{
-                  borderColor: '#f57f17',
-                  color: '#f57f17',
-                  fontWeight: 700,
-                  borderRadius: 2
-                }}
+                sx={{ borderColor: '#f57f17', color: '#f57f17', fontWeight: 700, borderRadius: 2 }}
               >
                 👨‍⚕️ Login as Staff
+              </Button>
+
+              {/* NEW - Admin Button */}
+              <Button
+                fullWidth
+                variant="outlined"
+                onClick={() => handleMockLogin('ADMIN')}
+                sx={{ borderColor: '#6a1b9a', color: '#6a1b9a', fontWeight: 700, borderRadius: 2 }}
+              >
+                🛡️ Login as Admin
               </Button>
             </Box>
           </Box>

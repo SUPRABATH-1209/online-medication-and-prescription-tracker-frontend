@@ -11,6 +11,7 @@ import {
   PieChart, Pie, Cell,
   ResponsiveContainer, Legend, Tooltip
 } from 'recharts';
+import AiChat from '../../components/common/AiChat';
 
 /**
  * PATIENT DASHBOARD
@@ -24,6 +25,7 @@ const PatientDashboard = () => {
 
   // Change this to test different views
   const [caretakerType] = useState('FAMILY');
+  const [showAI, setShowAI] = useState(false);
 
   const [todayMeds, setTodayMeds] = useState([
     { id: 1, medicine: 'Dolo 650', dosage: '650mg', slot: 'Morning', time: '7:00 AM - 9:00 AM', meal: 'After Meal', status: 'ON_TIME', markedAt: '8:15 AM', icon: '🌅' },
@@ -361,6 +363,31 @@ const PatientDashboard = () => {
           </Grid>
         </Grid>
       </Container>
+
+      {/* AI Chat Button - Fixed Position */}
+      <Box sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 9999 }}>
+        {showAI ? (
+          <AiChat role="PATIENT" onClose={() => setShowAI(false)} />
+        ) : (
+          <Button
+            variant="contained"
+            onClick={() => setShowAI(true)}
+            sx={{
+              bgcolor: '#2e7d32',
+              borderRadius: 4,
+              px: 3, py: 1.5,
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              boxShadow: '0 8px 25px rgba(46,125,50,0.4)',
+              '&:hover': { bgcolor: '#1b5e20', transform: 'scale(1.05)' },
+              transition: 'all 0.2s'
+            }}
+          >
+            🤖 Ask AI Assistant
+          </Button>
+        )}
+      </Box>
+
     </Box>
   );
 };

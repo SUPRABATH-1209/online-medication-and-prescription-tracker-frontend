@@ -27,6 +27,14 @@ import PatientProfile from './pages/patient/PatientProfile';
 import StaffLayout from './components/layout/StaffLayout';
 import StaffDashboard from './pages/staff/StaffDashboard';
 
+// Admin imports
+import AdminLayout from './components/layout/AdminLayout';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import ManageDoctors from './pages/admin/ManageDoctors';
+import ManagePatients from './pages/admin/ManagePatients';
+import ManageStaff from './pages/admin/ManageStaff';
+import AdminProfile from './pages/admin/AdminProfile';
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -60,6 +68,15 @@ function App() {
           {/* Staff Routes */}
           <Route path="/staff" element={<StaffLayout />}>
             <Route path="dashboard" element={<StaffDashboard />} />
+          </Route>
+
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="doctors" element={<ManageDoctors />} />
+            <Route path="patients" element={<ManagePatients />} />
+            <Route path="staff" element={<ManageStaff />} />
+            <Route path="profile" element={<AdminProfile />} />
           </Route>
         </Routes>
       </Router>

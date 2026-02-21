@@ -10,6 +10,7 @@ import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip,
   BarChart, Bar, XAxis, YAxis, CartesianGrid
 } from 'recharts';
+import AiChat from '../../components/common/AiChat';
 
 /**
  * DOCTOR DASHBOARD - REDESIGNED
@@ -23,6 +24,7 @@ const DoctorDashboard = () => {
 
   // Selected patient state
   const [selectedPatient, setSelectedPatient] = useState(null);
+  const [showAI, setShowAI] = useState(false);
 
   // Stats
   const stats = {
@@ -393,6 +395,31 @@ const DoctorDashboard = () => {
           )}
         </Grid>
       </Grid>
+
+      {/* AI Chat Button - Fixed Position */}
+      <Box sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 9999 }}>
+        {showAI ? (
+          <AiChat role="DOCTOR" onClose={() => setShowAI(false)} />
+        ) : (
+          <Button
+            variant="contained"
+            onClick={() => setShowAI(true)}
+            sx={{
+              bgcolor: '#0062ff',
+              borderRadius: 4,
+              px: 3, py: 1.5,
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              boxShadow: '0 8px 25px rgba(0,98,255,0.4)',
+              '&:hover': { bgcolor: '#0051d5', transform: 'scale(1.05)' },
+              transition: 'all 0.2s'
+            }}
+          >
+            🤖 Ask AI Assistant
+          </Button>
+        )}
+      </Box>
+
     </Box>
   );
 };
